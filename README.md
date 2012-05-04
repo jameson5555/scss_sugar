@@ -3,7 +3,11 @@ scss.sugar
 
 A sugar to make .scss files color coded like .css files
 
+Run this in terminal
 <pre>
-cd ~/Library/Application\ Support/Espresso/Sugars
-git clone git://github.com/jameson5555/scss.sugar.git
+git clone git://github.com/jameson5555/scss_sugar.git
 </pre>
+
+Move the file SCSS.sugar to /Applications/Espresso.app/Contents/SharedSupport/Sugars
+
+Restart Espresso
