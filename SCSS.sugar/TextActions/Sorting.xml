@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<action-sort-instructions>
+
+	<sort-template>
+		<selector>com.macrabbit.text-actions.css.new-style</selector>
+		<selector>com.macrabbit.text-actions.css.new-group</selector>
+	</sort-template>
+	
+</action-sort-instructions>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formatting>
+
+	<provider id="com.macrabbit.formatting.CSS" language-context="css">
+		
+		<template><![CDATA[
+		
+		#example-style ${css.post-selector: }
+		{
+			${css.post-open-bracket behavior="relative-contextual":\n\t}
+			
+			display ${css.pre-colon:} : ${css.post-colon: } block ${css.pre-semicolon:} ;
+			${css.between-properties behavior="relative-contextual":${css.post-open-bracket/.*/$0/s}}
+			float ${css.pre-colon} : ${css.post-colon} left ${css.pre-semicolon} ;
+			${css.between-properties}
+			clear ${css.pre-colon} : ${css.post-colon} both ${css.pre-semicolon} ;
+			
+			${css.pre-close-bracket behavior="relative-contextual":\n}
+		}
+		
+		${css.between-rules:\n\n}
+		
+		#another-style, ${css.post-list-item: } #third-style ${css.post-selector}
+		{
+			${css.post-open-bracket}
+			
+			width ${css.pre-colon} : ${css.post-colon} 20px ${css.pre-semicolon} ;
+			${css.between-properties}
+			height ${css.pre-colon} : ${css.post-colon}10px${css.pre-semicolon} ;
+			
+			${css.pre-close-bracket}
+		}
+		
+		]]></template>
+		
+		<rules>
+		
+			<before zone="selector.css, group-start" previous-zone="block.css:not(group-start)">
+				<use-template key="css.between-rules" />
+			</before>
+			
+			<after zone="selector > punctuation.comma">
+				<use-template key="css.post-list-item" />
+			</after>
+
+			<before zone="block.css:not(comment)">
+				<use-template key="css.post-selector" />
+			</before>
+
+			<after zone="block.css:not(comment) > punctuation.begin">
+				<use-template key="css.post-open-bracket" />
+			</after>
+
+			<before zone="block.css:not(comment) > punctuation.end">
+				<use-template key="css.pre-close-bracket" />
+			</before>
+
+			<before zone="property-value > punctuation.separator">
+				<use-template key="css.pre-colon" />
+			</before>
+
+			<after zone="property-value > punctuation.separator">
+				<use-template key="css.post-colon" />
+			</after>
+
+			<before zone="property-value > punctuation.terminator">
+				<use-template key="css.pre-semicolon" />
+			</before>
+
+			<after zone="property-value" next-zone="property-name">
+				<use-template key="css.between-properties" />
+			</after>
+			
+			<!-- Group styling (currently hard-coded) -->
+			<after zone="group-start">
+				<insert spacing="\n\n" />
+			</after>
+			
+			<before zone="group-end">
+				<insert spacing="\n\n" />
+			</before>
+		</rules>
+	</provider>
+</formatting>

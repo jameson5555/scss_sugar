@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	
+	<!-- This is the title used for the documentation lookup action for this context -->
+	<setting name="documentation-lookup-title">
+		<syntax-context>css property-name, css property-name + property-value > punctuation.separator</syntax-context>
+		<value>Documentation For Property</value>
+	</setting>
+
+	<!-- This is the first pattern that we check; if the URL is 404 or otherwise nonexistent, then we use the fallback -->
+	<setting name="documentation-lookup-pattern">
+		<syntax-context>css property-name, css property-name + property-value > punctuation.separator</syntax-context>
+		<value>http://reference.sitepoint.com/css/$EDITOR_TERM</value>
+	</setting>
+
+	<!-- The URL we use if the pattern doesn't check out; typically should point to search results for our docs site -->
+	<setting name="documentation-lookup-fallback">
+		<syntax-context>css property-name, css property-name + property-value > punctuation.separator</syntax-context>
+		<value><![CDATA[http://search.sitepoint.com/?refinements%5Breference%5D=1&refinements%5Barticles%5D=0&refinements%5Bblogs%5D=0&refinements%5Bmarketplace%5D=0&refinements%5Bforums%5D=0&refinements%5Bproducts%5D=0&q=$EDITOR_TERM]]></value>
+	</setting>
+	
+	<!-- This specifies what, aside from alphanumeric characters, will be considered a word character -->
+	<setting name="documentation-lookup-word-characters">
+		<syntax-context>css property-name, css property-name + property-value > punctuation.separator</syntax-context>
+		<value>_-</value>
+	</setting>
+	
+</settings>

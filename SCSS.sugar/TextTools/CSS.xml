@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<tool-recipes>
+	
+	<tool type="toolbar" id="com.macrabbit.text-tools.css.new-style" category="macrabbit">
+	
+		<class>ESTextActionToolbarTool</class>
+		<setup>
+			<main-action-selector>com.macrabbit.text-actions.css.new-style</main-action-selector>
+			<image>ToolNewStyle</image>
+		</setup>
+		
+	</tool>
+	
+	<tool type="toolbar" id="com.macrabbit.text-tools.css.new-group" category="macrabbit">
+	
+		<class>ESTextActionToolbarTool</class>
+		<setup>
+			<main-action-selector>com.macrabbit.text-actions.css.new-group</main-action-selector>
+			<image>ToolNewGroup</image>
+		</setup>
+		
+	</tool>
+	
+</tool-recipes>

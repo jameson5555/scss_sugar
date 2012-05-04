@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codesense version="1.0">
+	
+	<!-- SVG-specific properties -->
+	<set name="com.macrabbit.css.svn-specific-properties">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\s*:)|[^:]</matched-suffix>
+				<transform-into>(?1::: $0;)</transform-into>
+			</append-dynamic>
+			<confirm characters=":" />
+			<partial-confirm characters="-" />
+		</behavior>
+		<!-- From: http://www.w3.org/TR/SVG/styling.html -->
+		<!-- Commented out properties are conflicts with CSS3 properties -->
+		<completion string="clip-path" />
+		<completion string="clip-rule" />
+		<completion string="mask" />
+		<!--<completion string="opacity" />-->
+		<completion string="enable-background" />
+		<!--<completion string="filter" />-->
+		<completion string="flood-color" />
+		<completion string="flood-opacity" />
+		<completion string="lighting-color" />
+		<completion string="stop-color" />
+		<completion string="stop-opacity" />
+		<!--<completion string="pointer-events" />-->
+		<completion string="color-interpolation" />
+		<completion string="color-interpolation-filters" />
+		<completion string="color-profile" />
+		<completion string="color-rendering" />
+		<completion string="fill" />
+		<completion string="fill-opacity" />
+		<completion string="fill-rule" />
+		<completion string="image-rendering" />
+		<completion string="marker" />
+		<completion string="marker-end" />
+		<completion string="marker-mid" />
+		<completion string="marker-start" />
+		<completion string="shape-rendering" />
+		<completion string="stroke" />
+		<completion string="stroke-dasharray" />
+		<completion string="stroke-dashoffset" />
+		<completion string="stroke-linecap" />
+		<completion string="stroke-linejoin" />
+		<completion string="stroke-miterlimit" />
+		<completion string="stroke-opacity" />
+		<completion string="stroke-width" />
+		<completion string="text-rendering" />
+		<completion string="alignment-baseline" />
+		<completion string="baseline-shift" />
+		<completion string="dominant-baseline" />
+		<completion string="glyph-orientation-horizontal" />
+		<completion string="glyph-orientation-vertical" />
+		<completion string="kerning" />
+		<completion string="text-anchor" />
+		<completion string="writing-mode" />
+	</set>
+	
+	<!-- SVG property attributes -->
+	<behavior>
+		<append-dynamic>
+			<matched-suffix>\s*(;)?</matched-suffix>
+			<transform-into>$0(?1::;)</transform-into>
+		</append-dynamic>
+		<confirm characters=";" />
+		<partial-confirm characters="-" />
+	</behavior>
+	
+	<set name="com.macrabbit.css.property.clip-path">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@URI-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.clip-rule">
+		<completion string="nonzero"/>
+		<completion string="evenodd"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.mask">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.enable-background">
+		<completion string="accumulate"/>
+		<completion string="new"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.flood-color">
+		<completion string="inherit"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.flood-opacity">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.lighting-color">
+		<completion string="inherit"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stop-color">
+		<completion string="inherit"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stop-opacity">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.color-interpolation">
+		<completion string="auto"/>
+		<completion string="sRGB"/>
+		<completion string="linearRGB"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.color-interpolation-filters">
+		<completion string="auto"/>
+		<completion string="sRGB"/>
+		<completion string="linearRGB"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.color-profile">
+		<completion string="auto"/>
+		<completion string="sRGB"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.color-rendering">
+		<completion string="auto"/>
+		<completion string="optimizeSpeed"/>
+		<completion string="optimizeQuality"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.fill">
+		<completion string="none"/>
+		<completion string="currentColor"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.fill-opacity">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.fill-rule">
+		<completion string="nonzero"/>
+		<completion string="evenodd"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.color-rendering">
+		<completion string="auto"/>
+		<completion string="optimizeSpeed"/>
+		<completion string="optimizeQuality"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.marker">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.marker-start">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.marker-mid">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.marker-end">
+		<completion string="none"/>
+		<completion string="inherit"/>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.shape-rendering">
+		<completion string="auto"/>
+		<completion string="optimizeSpeed"/>
+		<completion string="cripsEdges"/>
+		<completion string="geometricPrecision"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke">
+		<completion string="none"/>
+		<completion string="currentColor"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<!--@uri-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-dasharray">
+		<completion string="none"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-dashoffset">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-linecap">
+		<completion string="butt"/>
+		<completion string="round"/>
+		<completion string="square"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-linejoin">
+		<completion string="miter"/>
+		<completion string="round"/>
+		<completion string="bevel"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-miterlimit">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-opacity">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.stroke-width">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.text-rendering">
+		<completion string="auto"/>
+		<completion string="optimizeSpeed"/>
+		<completion string="optimizeLegibility"/>
+		<completion string="geometricPrecision"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.alignment-baseline">
+		<completion string="auto" />
+		<completion string="baseline" />
+		<completion string="before-edge" />
+		<completion string="text-before-edge" />
+		<completion string="middle" />
+		<completion string="central" />
+		<completion string="after-edge" />
+		<completion string="text-after-edge" />
+		<completion string="ideographic" />
+		<completion string="alphabetic" />
+		<completion string="hanging" />
+		<completion string="mathematical" />
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.baseline-shift">
+		<completion string="baseline" />
+		<completion string="sub" />
+		<completion string="super" />
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.dominant-baseline">
+		<completion string="auto" />
+		<completion string="use-script" />
+		<completion string="no-change" />
+		<completion string="reset-size" />
+		<completion string="ideographic" />
+		<completion string="alphabetic" />
+		<completion string="hanging" />
+		<completion string="mathematical" />
+		<completion string="central" />
+		<completion string="middle" />
+		<completion string="text-after-edge" />
+		<completion string="text-before-edge" />
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.glyph-orientation-horizontal">
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.glyph-orientation-vertical">
+		<completion string="auto"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.kerning">
+		<completion string="auto"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.text-anchor">
+		<completion string="start" />
+		<completion string="middle" />
+		<completion string="end" />
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.writing-mode">
+		<completion string="lr-tb" />
+		<completion string="rl-tb" />
+		<completion string="tb-rl" />
+		<completion string="lr" />
+		<completion string="rl" />
+		<completion string="tb" />
+		<completion string="inherit"/>
+	</set>
+	
+</codesense>

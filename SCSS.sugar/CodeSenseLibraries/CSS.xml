@@ -1,0 +1,3510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+CodeSense Libraries simply define lists of completions, categorized by keys. They don't define any criteria for when they should be used; this is the domain of a CodeSense Provider.
+
+-->
+<codesense version="1.0">
+
+	<!-- A completion behavior can customize the behavior of a completion when it's selected in the completion list. If a behavior is defined in the root <codesense> element, it will be applied to all completion sets inside (unless more specific behaviors are defined in the sets). -->
+	<behavior>
+		<!-- TODO: regular append example? -->
+	
+		<!-- The <append-dynamic> element allows you to dynamically generate a snippet to append after the actual completion. -->
+		<append-dynamic>
+			<!-- The matched suffix allows you to capture information about the text after the completion. -->
+			<matched-suffix>\s*(;)?</matched-suffix>
+			<!-- The transform-into element is a regex replacement expression, and can use the captured strings from matched-suffix to generate a conditional snippet. -->
+			<transform-into>$0(?1::;)</transform-into>
+		</append-dynamic>
+		
+		<!-- (optional) The confirm-characters element specifies additional characters that trigger the confirmation of a completion. -->
+		<confirm characters=";" />
+		
+		<!-- (optional) The partial-confirm element specifies characters that are contained within the completion. When they're pressed, the completion will confirm up to that character (including the character itself) and continue completing. This is useful for things like CSS properties or PHP functions. -->
+		<partial-confirm characters="-" />
+	</behavior>
+	
+	<!-- Default properties -->
+	<set name="com.macrabbit.css.properties">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\s*:)|[^:]</matched-suffix>
+				<transform-into>(?1::: $0;)</transform-into>
+			</append-dynamic>
+			<confirm characters=":" />
+			<partial-confirm characters="-" />
+		</behavior>
+		<!-- Common properties; a couple are Safari or IE-only, though -->
+		<completion string="azimuth" />
+		<completion string="background">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:#f5f5f5} url('${3:../images/bg.jpg}'\) ${4:no-repeat} ${5:${6:left} ${7:top}}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="background-attachment" />
+		<completion string="background-color" />
+		<completion string="background-image" />
+		<completion string="background-position" />
+		<completion string="background-position-x" />
+		<completion string="background-position-y" />
+		<completion string="background-repeat" />
+		<completion string="behavior" />
+		<completion string="border">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:1px} ${3:solid} ${4:#333}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-bottom">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:1px} ${3:solid} ${4:#333}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-bottom-color" />
+		<completion string="border-bottom-style" />
+		<completion string="border-bottom-width" />
+		<completion string="border-collapse" />
+		<completion string="border-color" />
+		<completion string="border-left">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:1px} ${3:solid} ${4:#333}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-left-color" />
+		<completion string="border-left-style" />
+		<completion string="border-left-width" />
+		<completion string="border-right">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:1px} ${3:solid} ${4:#333}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-right-color" />
+		<completion string="border-right-style" />
+		<completion string="border-right-width" />
+		<completion string="border-spacing" />
+		<completion string="border-style" />
+		<completion string="border-top">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:1px} ${3:solid} ${4:#333}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-top-color" />
+		<completion string="border-top-style" />
+		<completion string="border-top-width" />
+		<completion string="border-width" />
+		<completion string="bottom" />
+		<completion string="caption-side" />
+		<completion string="clear" />
+		<completion string="clip" />
+		<completion string="color" />
+		<completion string="content" />
+		<completion string="counter-increment" />
+		<completion string="counter-reset" />
+		<completion string="cue" />
+		<completion string="cue-after" />
+		<completion string="cue-before" />
+		<completion string="cursor" />
+		<completion string="direction" />
+		<completion string="display" />
+		<completion string="elevation" />
+		<completion string="empty-cells" />
+		<completion string="fit"/>
+		<completion string="fit-position"/>
+		<completion string="float" />
+		<completion string="font">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:bold} ${3:1em}${4:/1.5em} ${5:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="font-family" />
+		<completion string="font-size" />
+		<completion string="font-size-adjust" />
+		<completion string="font-stretch" />
+		<completion string="font-style" />
+		<completion string="font-variant" />
+		<completion string="font-weight" />
+		<completion string="filter" />
+		<completion string="height" />
+		<completion string="image-orientation"/>
+		<completion string="left" />
+		<completion string="letter-spacing" />
+		<completion string="line-height" />
+		<completion string="list-style" />
+		<completion string="list-style-image" />
+		<completion string="list-style-position" />
+		<completion string="list-style-type" />
+		<completion string="margin" />
+		<completion string="margin-bottom" />
+		<completion string="margin-left" />
+		<completion string="margin-right" />
+		<completion string="margin-top" />
+		<completion string="marker-offset" />
+		<completion string="max-height" />
+		<completion string="max-width" />
+		<completion string="min-height" />
+		<completion string="min-width" />
+		<completion string="opacity" />
+		<completion string="orphans" />
+		<completion string="outline" />
+		<completion string="outline-color" />
+		<completion string="outline-offset" />
+		<completion string="outline-style" />
+		<completion string="outline-width" />
+		<completion string="overflow" />
+		<completion string="overflow-x" />
+		<completion string="overflow-y" />
+		<completion string="padding" />
+		<completion string="padding-bottom" />
+		<completion string="padding-left" />
+		<completion string="padding-right" />
+		<completion string="padding-top" />
+		<completion string="page" />
+		<completion string="page-break-after" />
+		<completion string="page-break-before" />
+		<completion string="page-break-inside" />
+		<completion string="pause" />
+		<completion string="pause-after" />
+		<completion string="pause-before" />
+		<completion string="pitch" />
+		<completion string="pitch-range" />
+		<completion string="play-during" />
+		<completion string="pointer-events" />
+		<completion string="position" />
+		<completion string="quotes" />
+		<completion string="resize" />
+		<completion string="richness" />
+		<completion string="right" />
+		<completion string="size" />
+		<completion string="speak" />
+		<completion string="speak-header" />
+		<completion string="speak-numeral" />
+		<completion string="speak-punctuation" />
+		<completion string="speech-rate" />
+		<completion string="src" />
+		<completion string="stress" />
+		<completion string="table-layout" />
+		<completion string="text-align" />
+		<completion string="text-decoration" />
+		<completion string="text-indent" />
+		<completion string="text-overflow" />
+		<completion string="text-shadow" />
+		<completion string="text-transform" />
+		<completion string="top" />
+		<completion string="unicode-bidi" />
+		<completion string="unicode-range" />
+		<completion string="vertical-align" />
+		<completion string="visibility" />
+		<completion string="voice-family" />
+		<completion string="volume" />
+		<completion string="white-space" />
+		<completion string="widows" />
+		<completion string="width" />
+		<completion string="word-break" />
+		<completion string="word-spacing" />
+		<completion string="word-wrap" />
+		<completion string="z-index" />
+		<completion string="zoom" />
+		
+		<!-- CSS3 specs; final recommendations, but may not be implemented in browsers yet -->
+		
+		<!-- http://www.w3.org/TR/css3-ruby/ -->
+		<completion string="ruby-position" />
+		<completion string="ruby-align" />
+		<completion string="ruby-overhang" />
+		<completion string="ruby-span" />
+		
+		<!-- http://www.w3.org/TR/css3-marquee/ -->
+		<completion string="overflow-style" />
+		<completion string="marquee-style" />
+		<completion string="marquee-play-count" />
+		<completion string="marquee-direction" />
+		<completion string="marquee-speed" />
+		
+		<!-- http://www.w3.org/TR/css3-ui/ -->
+		<completion string="appearance"/>
+		<completion string="icon" />
+		<completion string="box-sizing" />
+		<completion string="nav-index" />
+		<completion string="nav-up" />
+		<completion string="nav-right" />
+		<completion string="nav-down" />
+		<completion string="nav-left" />
+		
+		<!-- http://www.w3.org/TR/css3-multicol/ -->
+		<completion string="column-width" />
+		<completion string="column-count" />
+		<completion string="columns" />
+		<completion string="column-gap" />
+		<completion string="column-rule-color" />
+		<completion string="column-rule-style" />
+		<completion string="column-rule-width" />
+		<completion string="column-rule" />
+		<completion string="break-before" />
+		<completion string="break-after" />
+		<completion string="break-inside" />
+		<completion string="column-span" />
+		<completion string="column-fill" />
+		
+		<!-- http://www.w3.org/TR/css3-background/ -->
+		<completion string="border-image-slice" />
+		<completion string="border-image-source" />
+		<completion string="border-image-width" />
+		<completion string="border-image-outset" />
+		<completion string="border-image-repeat" />
+		<completion string="border-image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:url('${3:../images/border.jpg}'\)} ${4:5 3 5 3} ${5:repeat stretch}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border-bottom-right-radius" />
+		<completion string="border-bottom-left-radius" />
+		<completion string="border-top-right-radius" />
+		<completion string="border-top-left-radius" />
+		<completion string="border-radius"/>
+		<completion string="box-shadow">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:0px} ${3:3px} ${4:5px} ${5:#444}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		
+		<!-- http://www.w3.org/TR/css3-flexbox/ -->
+		<completion string="box-orient" />
+		<completion string="box-direction" />
+		<completion string="box-ordinal-group" />
+		<completion string="box-align" />
+		<completion string="box-flex" />
+		<completion string="box-flex-group" />
+		<completion string="box-pack" />
+		<completion string="box-lines" />
+		
+		<!-- http://www.w3.org/TR/WD-font/ -->
+		<completion string="font-smooth"/>
+	</set>
+	
+	<!-- Vendor-specific properties -->
+	<set name="com.macrabbit.css.browser-specific-properties">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\s*:)|[^:]</matched-suffix>
+				<transform-into>(?1::: $0;)</transform-into>
+			</append-dynamic>
+			<confirm characters=":" />
+			<partial-confirm characters="-" />
+		</behavior>
+		<!-- http://developer.apple.com/safari/library/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html -->
+		<completion string="-webkit-animation">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:myAnimation} ${3:1s} ${4:ease-in-out} ${5:0s} ${6:infinite} ${7:alternate}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-animation-delay" />
+		<completion string="-webkit-animation-direction" />
+		<completion string="-webkit-animation-duration" />
+		<completion string="-webkit-animation-iteration-count" />
+		<completion string="-webkit-animation-name" />
+		<completion string="-webkit-animation-play-state" />
+		<completion string="-webkit-animation-timing-function" />
+		<completion string="-webkit-appearance" />
+		<completion string="-webkit-backface-visibility" />
+		<completion string="-webkit-background-clip" />
+		<completion string="-webkit-background-composite" />
+		<completion string="-webkit-background-origin" />
+		<completion string="-webkit-background-size" />
+		<completion string="-webkit-border-bottom-left-radius" />
+		<completion string="-webkit-border-bottom-right-radius" />
+		<completion string="-webkit-border-horizontal-spacing" />
+		<completion string="-webkit-border-image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:url('${3:../images/border.jpg}'\)} ${4:5 3 5 3} ${5:repeat stretch}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-border-radius" />
+		<completion string="-webkit-border-top-left-radius" />
+		<completion string="-webkit-border-top-right-radius" />
+		<completion string="-webkit-border-vertical-spacing" />
+		<completion string="-webkit-box-align" />
+		<completion string="-webkit-box-direction" />
+		<completion string="-webkit-box-flex" />
+		<completion string="-webkit-box-flex-group" />
+		<completion string="-webkit-box-lines" />
+		<completion string="-webkit-box-ordinal-group" />
+		<completion string="-webkit-box-orient" />
+		<completion string="-webkit-box-pack" />
+		<completion string="-webkit-box-reflect">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:below} ${3:10px} ${4:url(${5:../images/mask.png}\)}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-box-shadow">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:0px} ${3:3px} ${4:5px} ${5:#444}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-box-sizing" />
+		<completion string="-webkit-column-break-after" />
+		<completion string="-webkit-column-break-before" />
+		<completion string="-webkit-column-break-inside" />
+		<completion string="-webkit-column-count" />
+		<completion string="-webkit-column-gap" />
+		<completion string="-webkit-column-rule" />
+		<completion string="-webkit-column-rule-color" />
+		<completion string="-webkit-column-rule-style" />
+		<completion string="-webkit-column-rule-width" />
+		<completion string="-webkit-column-width" />
+		<completion string="-webkit-columns" />
+		<completion string="-webkit-font-smoothing"/>
+		<completion string="-webkit-line-break" />
+		<completion string="-webkit-margin-bottom-collapse" />
+		<completion string="-webkit-margin-collapse" />
+		<completion string="-webkit-margin-start" />
+		<completion string="-webkit-margin-top-collapse" />
+		<completion string="-webkit-marquee">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:ahead} ${3:small} ${4:infinite} ${5:scroll} ${6:slow}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-marquee-direction" />
+		<completion string="-webkit-marquee-increment" />
+		<completion string="-webkit-marquee-repetition" />
+		<completion string="-webkit-marquee-speed" />
+		<completion string="-webkit-marquee-style" />
+		<completion string="-webkit-mask">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:border} ${3:url('${4:../images/mask.png}'\)} ${6:no-repeat}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-mask-attachment" />
+		<completion string="-webkit-mask-box-image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:url('${3:../images/border-mask.png}'\)} ${4:0px 0px 0px 0px} ${5:repeat stretch}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-mask-clip" />
+		<completion string="-webkit-mask-composite" />
+		<completion string="-webkit-mask-image" />
+		<completion string="-webkit-mask-origin" />
+		<completion string="-webkit-mask-position" />
+		<completion string="-webkit-mask-position-x" />
+		<completion string="-webkit-mask-position-y" />
+		<completion string="-webkit-mask-repeat" />
+		<completion string="-webkit-mask-size" />
+		<completion string="-webkit-nbsp-mode" />
+		<completion string="-webkit-padding-start" />
+		<completion string="-webkit-perspective" />
+		<completion string="-webkit-perspective-origin" />
+		<completion string="-webkit-rtl-ordering" />
+		<completion string="-webkit-text-fill-color" />
+		<completion string="-webkit-text-security" />
+		<completion string="-webkit-text-size-adjust" />
+		<completion string="-webkit-text-stroke" />
+		<completion string="-webkit-text-stroke-color" />
+		<completion string="-webkit-text-stroke-width" />
+		<completion string="-webkit-transform" />
+		<completion string="-webkit-transform-origin" />
+		<completion string="-webkit-transform-origin-x" />
+		<completion string="-webkit-transform-origin-y" />
+		<completion string="-webkit-transform-origin-z" />
+		<completion string="-webkit-transform-style" />
+		<completion string="-webkit-transition">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:opacity} ${3:1s} ${4:ease-in-out} ${5:0s}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-transition-delay" />
+		<completion string="-webkit-transition-duration" />
+		<completion string="-webkit-transition-property" />
+		<completion string="-webkit-transition-timing-function" />
+		<completion string="-webkit-user-drag" />
+		<completion string="-webkit-user-modify" />
+		<completion string="-webkit-user-select" />
+		
+		<!-- https://developer.mozilla.org/en/CSS_Reference/Mozilla_Extensions -->
+		<completion string="-moz-appearance" />
+		<completion string="-moz-background-clip" />
+		<completion string="-moz-background-inline-policy" />
+		<completion string="-moz-background-origin" />
+		<completion string="-moz-background-size" />
+		<completion string="-moz-binding" />
+		<completion string="-moz-border-bottom-colors" />
+		<completion string="-moz-border-end" />
+		<completion string="-moz-border-end-color" />
+		<completion string="-moz-border-end-style" />
+		<completion string="-moz-border-end-width" />
+		<completion string="-moz-border-image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:url('${3:../images/border.jpg}'\)} ${4:5 3 5 3} ${5:repeat stretch}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-border-left-colors" />
+		<completion string="-moz-border-radius" />
+		<completion string="-moz-border-radius-bottomleft" />
+		<completion string="-moz-border-radius-bottomright" />
+		<completion string="-moz-border-radius-topleft" />
+		<completion string="-moz-border-radius-topright" />
+		<completion string="-moz-border-right-colors" />
+		<completion string="-moz-border-start" />
+		<completion string="-moz-border-start-color" />
+		<completion string="-moz-border-start-style" />
+		<completion string="-moz-border-style-width" />
+		<completion string="-moz-border-top-colors" />
+		<completion string="-moz-box-align" />
+		<completion string="-moz-box-direction" />
+		<completion string="-moz-box-flex" />
+		<completion string="-moz-box-flexgroup" />
+		<completion string="-moz-box-ordinal-group" />
+		<completion string="-moz-box-orient" />
+		<completion string="-moz-box-pack" />
+		<completion string="-moz-box-shadow">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*:)|[^:]</matched-suffix>
+					<transform-into>(?1::: ${1:${2:0px} ${3:3px} ${4:5px} ${5:#444}};)</transform-into>
+				</append-dynamic>
+				<confirm characters=":" />
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-box-sizing" />
+		<completion string="-moz-column-count" />
+		<completion string="-moz-column-gap" />
+		<completion string="-moz-column-rule" />
+		<completion string="-moz-column-rule-color" />
+		<completion string="-moz-column-rule-style" />
+		<completion string="-moz-column-rule-width" />
+		<completion string="-moz-column-width" />
+		<completion string="-moz-float-edge" />
+		<completion string="-moz-force-broken-image-icon" />
+		<completion string="-moz-image-region" />
+		<completion string="-moz-margin-end" />
+		<completion string="-moz-margin-start" />
+		<completion string="-moz-outline-radius" />
+		<completion string="-moz-outline-radius-bottomleft" />
+		<completion string="-moz-outline-radius-bottomright" />
+		<completion string="-moz-outline-radius-topleft" />
+		<completion string="-moz-outline-radius-topright" />
+		<completion string="-moz-padding-end" />
+		<completion string="-moz-padding-start" />
+		<completion string="-moz-stack-sizing" />
+		<completion string="-moz-transform"/>
+		<completion string="-moz-transform-origin" />
+		<completion string="-moz-transition" />
+		<completion string="-moz-transition-delay" />
+		<completion string="-moz-transition-duration" />
+		<completion string="-moz-transition-property" />
+		<completion string="-moz-transition-timing-function" />
+		<completion string="-moz-user-focus" />
+		<completion string="-moz-user-input" />
+		<completion string="-moz-user-modify" />
+		<completion string="-moz-user-select" />
+		<completion string="-moz-window-shadow" />
+		
+		<!-- http://blogs.msdn.com/b/ie/archive/2008/09/08/microsoft-css-vendor-extensions.aspx -->
+		<completion string="-ms-accelerator" />
+		<completion string="-ms-background-position-x" />
+		<completion string="-ms-background-position-y" />
+		<completion string="-ms-behavior" />
+		<completion string="-ms-block-progression" />
+		<completion string="-ms-filter" />
+		<completion string="-ms-ime-mode" />
+		<completion string="-ms-interpolation-mode" />
+		<completion string="-ms-layout-grid" />
+		<completion string="-ms-layout-grid-char" />
+		<completion string="-ms-layout-grid-line" />
+		<completion string="-ms-layout-grid-mode" />
+		<completion string="-ms-layout-grid-type" />
+		<completion string="-ms-line-break" />
+		<completion string="-ms-line-grid-mode" />
+		<completion string="-ms-overflow-x" />
+		<completion string="-ms-overflow-y" />
+		<completion string="-ms-scrollbar-3dlight-color" />
+		<completion string="-ms-scrollbar-arrow-color" />
+		<completion string="-ms-scrollbar-base-color" />
+		<completion string="-ms-scrollbar-darkshadow-color" />
+		<completion string="-ms-scrollbar-highlight-color" />
+		<completion string="-ms-scrollbar-shadow-color" />
+		<completion string="-ms-scrollbar-track-color" />
+		<completion string="-ms-text-align-last" />
+		<completion string="-ms-text-autospace" />
+		<completion string="-ms-text-justify" />
+		<completion string="-ms-text-kashida-space" />
+		<completion string="-ms-text-overflow" />
+		<completion string="-ms-text-underline-position" />
+		<completion string="-ms-word-break" />
+		<completion string="-ms-word-wrap" />
+		<completion string="-ms-writing-mode" />
+		<completion string="-ms-zoom" />
+		
+		<!-- http://www.opera.com/docs/specs/presto25/ -->
+		<completion string="-o-background-size" />
+		<completion string="-o-table-baseline" />
+		<completion string="-o-text-overflow" />
+		<completion string="-o-transform" />
+		<completion string="-o-transform-origin" />
+		<completion string="-o-transition" />
+		<completion string="-o-transition-delay" />
+		<completion string="-o-transition-duration" />
+		<completion string="-o-transition-property" />
+		<completion string="-o-transition-timing-function" />
+	</set>
+	
+	<!-- Pseudo-classes and elements -->
+	<set name="com.macrabbit.css.pseudo-classes">
+		<behavior>
+			<append-static></append-static>
+			<confirm characters="" />
+			<partial-confirm characters="-" />
+		</behavior>
+		<completion string=":root" />
+		<completion string=":first-child" />
+		<completion string=":last-child" />
+		<completion string=":first-of-type" />
+		<completion string=":last-of-type" />
+		<completion string=":only-child" />
+		<completion string=":only-of-type" />
+		<completion string=":empty" />
+		<completion string=":link" />
+		<completion string=":visited" />
+		<completion string=":active" />
+		<completion string=":hover" />
+		<completion string=":focus" />
+		<completion string=":target" />
+		<completion string=":enabled" />
+		<completion string=":disabled" />
+		<completion string=":checked" />
+		<!-- CSS2 pseudo-elements -->
+		<completion string=":first-line" />
+		<completion string=":first-letter" />
+		<completion string=":before" />
+		<completion string=":after" />
+		<!-- CSS3 pseudo-elements -->
+		<completion string="::first-line" />
+		<completion string="::first-letter" />
+		<completion string="::before" />
+		<completion string="::after" />
+	</set>
+	
+	<set name="com.macrabbit.css.pseudo-classes.equations">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\()|[^(]</matched-suffix>
+				<transform-into>(?1::($0\))</transform-into>
+			</append-dynamic>
+			<confirm characters="(" />
+			<partial-confirm characters="-" />
+		</behavior>
+		<completion string=":lang" />
+		<completion string=":nth-child" />
+		<completion string=":nth-last-child" />
+		<completion string=":nth-of-type" />
+		<completion string=":nth-last-of-type" />
+		<completion string=":not" />
+	</set>
+	
+	<!-- At-keywords -->
+	<set name="com.macrabbit.css.at-keywords">
+		<completion string="@charset">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*")|\s*[^"]</matched-suffix>
+					<transform-into>(?1:: "${1:UTF-8}";)</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="@font-face">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*\{)|\s*[^{]</matched-suffix>
+					<transform-into>(?1:: {
+	$0
+})</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-"/>
+			</behavior>
+		</completion>
+		<completion string="@import">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*["'])|\s*[^"']</matched-suffix>
+					<transform-into>(?1:: "${1:path/to/file.css}";)</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="@keyframes">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*["'])|\s*[^"']</matched-suffix>
+					<transform-into>(?1:: '${1:name}' {
+	$0
+})</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="@-webkit-keyframes">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*["'])|\s*[^"']</matched-suffix>
+					<transform-into>(?1:: '${1:name}' {
+	$0
+})</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-"/>
+			</behavior>
+		</completion>
+		<completion string="@media">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*[a-zA-Z])|\s*[^a-zA-Z]</matched-suffix>
+					<transform-into>(?1:: ${1:print} {
+	$0
+})</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="@namespace">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*[a-zA-Z"'])|\s*[^a-zA-Z"']</matched-suffix>
+					<transform-into>(?1:: ${1:prefix} "${2:namespace-name}";)</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="@page">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\s*[:a-zA-Z])|\s*[^:a-zA-Z]</matched-suffix>
+					<transform-into>(?1:: ${1:label} {
+	$0
+})</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<!-- Generic shared !important keyword -->
+	<set name="com.macrabbit.css.generic-property-values">
+		<!-- Clear out the default behavior, since we just want to complete the string -->
+		<behavior>
+			<behavior>
+				<append-static></append-static>
+				<confirm characters="" />
+				<partial-confirm characters="" />
+			</behavior>
+		</behavior>
+		<completion string="!important"/>
+	</set>
+	
+	<!-- Specific property values -->
+	<set name="com.macrabbit.css.property.azimuth">
+		<completion string="left-side" />
+		<completion string="far-left" />
+		<completion string="left" />
+		<completion string="center-left" />
+		<completion string="center" />
+		<completion string="center-right" />
+		<completion string="right" />
+		<completion string="far-right" />
+		<completion string="right-side" />
+		<completion string="behind" />
+		<completion string="leftwards" />
+		<completion string="rightwards" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.appearance">
+		<completion string="normal"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.background">
+		<behavior>
+			<append-static>
+				<transform-into></transform-into>
+			</append-static>
+		</behavior>
+		<completion string="scroll" />
+		<completion string="fixed" />
+		<completion string="transparent" />
+		<completion string="none" />
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="repeat" />
+		<completion string="repeat-x" />
+		<completion string="repeat-y" />
+		<completion string="no-repeat" />
+		<completion string="inherit" />
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.background-attachment">
+		<completion string="scroll"/>
+		<completion string="fixed"/>
+		<completion string="local"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.background-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.background-image">
+		<completion string="none" />
+		<completion string="inherit" />
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.background-position">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.background-repeat">
+		<completion string="repeat" />
+		<completion string="repeat-x" />
+		<completion string="repeat-y" />
+		<completion string="no-repeat" />
+		<completion string="round"/>
+		<completion string="space"/>
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-bottom">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-bottom-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-bottom-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-bottom-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-collapse">
+		<completion string="collapse" />
+		<completion string="separate" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-left">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-left-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-left-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-left-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-right">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-right-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-right-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-right-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-spacing">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-top">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-top-color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.border-top-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-top-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.border-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.bottom">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.box-sizing">
+		<completion string="content-box"/>
+		<completion string="border-box"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.break-after">
+		<completion string="auto"/>
+		<completion string="always"/>
+		<completion string="avoid"/>
+		<completion string="left"/>
+		<completion string="right"/>
+		<completion string="page"/>
+		<completion string="column"/>
+		<completion string="avoid-page"/>
+		<completion string="avoid-column"/>
+	</set>
+	<set name="com.macrabbit.css.property.break-before">
+		<completion string="auto"/>
+		<completion string="always"/>
+		<completion string="avoid"/>
+		<completion string="left"/>
+		<completion string="right"/>
+		<completion string="page"/>
+		<completion string="column"/>
+		<completion string="avoid-page"/>
+		<completion string="avoid-column"/>
+	</set>
+	<set name="com.macrabbit.css.property.break-inside">
+		<completion string="auto"/>
+		<completion string="avoid"/>
+		<completion string="avoid-page"/>
+		<completion string="avoid-column"/>
+	</set>
+	<set name="com.macrabbit.css.property.caption-side">
+		<completion string="top" />
+		<completion string="bottom" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.clear">
+		<completion string="none" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="both" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.clip">
+		<completion string="auto" />
+		<completion string="inherit" />
+		<completion string="rect">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.color">
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<!-- TODO: create -moz and -webkit versions of these when I can do duplication -->
+	<set name="com.macrabbit.css.property.column-count">
+		<completion string="auto"/>
+	</set>
+	<set name="com.macrabbit.css.property.column-fill">
+		<completion string="auto"/>
+		<completion string="balance"/>
+	</set>
+	<set name="com.macrabbit.css.property.column-gap">
+		<completion string="normal"/>
+	</set>
+	<set name="com.macrabbit.css.property.column-rule">
+		<!-- border-width -->
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!-- border-style -->
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+		<completion string="transparent"/>
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.column-rule-color">
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.column-rule-style">
+		<!-- border-style -->
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.column-rule-width">
+		<!-- border-width -->
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.columns">
+		<completion string="auto"/>
+	</set>
+	<set name="com.macrabbit.css.property.column-span">
+		<completion string="all"/>
+	</set>
+	<set name="com.macrabbit.css.property.column-width">
+		<completion string="auto"/>
+	</set>
+	<set name="com.macrabbit.css.property.content">
+		<completion string="icon"/>
+		<completion string="open-quote" />
+		<completion string="close-quote" />
+		<completion string="no-open-quote" />
+		<completion string="no-close-quote" />
+		<completion string="inherit" />
+		<completion string="normal"/>
+		<completion string="none"/>
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="counter">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="attr">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.counter-increment">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.counter-reset">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.cue">
+		<completion string="inherit" />
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.cue-after">
+		<completion string="none" />
+		<completion string="inherit" />
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.cue-before">
+		<completion string="none" />
+		<completion string="inherit" />
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.cursor">
+		<completion string="auto" />
+		<completion string="crosshair" />
+		<completion string="default" />
+		<completion string="pointer" />
+		<completion string="move" />
+		<completion string="e-resize" />
+		<completion string="ne-resize" />
+		<completion string="nw-resize" />
+		<completion string="n-resize" />
+		<completion string="se-resize" />
+		<completion string="sw-resize" />
+		<completion string="s-resize" />
+		<completion string="w-resize" />
+		<completion string="text" />
+		<completion string="wait" />
+		<completion string="help" />
+		<completion string="inherit" />
+		<!-- New in CSS3 -->
+		<completion string="none" />
+		<completion string="context-menu" />
+		<completion string="progress" />
+		<completion string="cell" />
+		<completion string="vertical-text" />
+		<completion string="alias" />
+		<completion string="copy" />
+		<completion string="no-drop" />
+		<completion string="not-allowed" />
+		<completion string="ew-resize" />
+		<completion string="ns-resize" />
+		<completion string="nesw-resize" />
+		<completion string="nwse-resize" />
+		<completion string="col-resize" />
+		<completion string="row-resize" />
+		<completion string="all-scroll" />
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.direction">
+		<completion string="ltr" />
+		<completion string="rtl" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.display">
+		<completion string="inherit" />
+		<completion string="block" />
+		<completion string="compact" />
+		<completion string="inline" />
+		<completion string="inline-block" />
+		<completion string="inline-table" />
+		<completion string="list-item" />
+		<completion string="none" />
+		<completion string="ruby" />
+		<completion string="ruby-base" />
+		<completion string="ruby-base-group" />
+		<completion string="ruby-text" />
+		<completion string="ruby-text-group" />
+		<completion string="run-in" />
+		<completion string="table" />
+		<completion string="table-caption" />
+		<completion string="table-cell" />
+		<completion string="table-column" />
+		<completion string="table-column-group" />
+		<completion string="table-footer-group" />
+		<completion string="table-header-group" />
+		<completion string="table-row" />
+		<completion string="table-row-group" />
+		<!-- Vendor-specific options -->
+		<completion string="-webkit-box"/>
+		<completion string="-webkit-inline-box"/>
+		<completion string="box"/>
+		<completion string="inline-box"/>
+	</set>
+	<set name="com.macrabbit.css.property.elevation">
+		<completion string="below" />
+		<completion string="level" />
+		<completion string="above" />
+		<completion string="higher" />
+		<completion string="lower" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.empty-cells">
+		<completion string="show" />
+		<completion string="hide" />
+	</set>
+	<set name="com.macrabbit.css.property.fit">
+		<completion string="fill" />
+		<completion string="hidden" />
+		<completion string="meet" />
+		<completion string="slice" />
+	</set>
+	<set name="com.macrabbit.css.property.fit-position">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="auto" />
+	</set>
+	<set name="com.macrabbit.css.property.float">
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="none" />
+	</set>
+	<set name="com.macrabbit.css.property.font">
+		<completion string="inherit" />
+		<completion string="caption" />
+		<completion string="icon" />
+		<completion string="menu" />
+		<completion string="message-box" />
+		<completion string="small-caption" />
+		<completion string="status-bar" />
+		
+		<completion string="serif" />
+		<completion string="sans-serif" />
+		<completion string="cursive" />
+		<completion string="fantasy" />
+		<completion string="monospace" />
+		
+		<completion string="xx-small" />
+		<completion string="x-small" />
+		<completion string="small" />
+		<completion string="medium" />
+		<completion string="large" />
+		<completion string="x-large" />
+		<completion string="xx-large" />
+		
+		<completion string="normal" />
+		<completion string="italic" />
+		<completion string="oblique" />
+		
+		<completion string="small-caps" />
+		
+		<completion string="bold" />		
+	</set>
+	<set name="com.macrabbit.css.property.font-family">
+		<completion string="serif" />
+		<completion string="sans-serif" />
+		<completion string="cursive" />
+		<completion string="fantasy" />
+		<completion string="monospace" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.font-size">
+		<completion string="xx-small" />
+		<completion string="x-small" />
+		<completion string="small" />
+		<completion string="medium" />
+		<completion string="large" />
+		<completion string="x-large" />
+		<completion string="xx-large" />
+	</set>
+	<set name="com.macrabbit.css.property.font-size-adjust">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.font-stretch">
+		<completion string="normal" />
+		<completion string="wider" />
+		<completion string="narrower" />
+		<completion string="ultra-condensed" />
+		<completion string="extra-condensed" />
+		<completion string="condensed" />
+		<completion string="semi-condensed" />
+		<completion string="semi-expanded" />
+		<completion string="expanded" />
+		<completion string="extra-expanded" />
+		<completion string="ultra-expanded" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.font-style">
+		<completion string="normal" />
+		<completion string="italic" />
+		<completion string="oblique" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.font-variant">
+		<completion string="normal" />
+		<completion string="small-caps" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.font-weight">
+		<completion string="normal" />
+		<completion string="bold" />
+		<completion string="bolder" />
+		<completion string="lighter" />
+		<completion string="100" />
+		<completion string="200" />
+		<completion string="300" />
+		<completion string="400" />
+		<completion string="500" />
+		<completion string="600" />
+		<completion string="700" />
+		<completion string="800" />
+		<completion string="900" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.height">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.icon">
+		<completion string="auto"/>
+		<completion string="inherit"/>
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.image-orientation">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.left">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.letter-spacing">
+		<completion string="normal" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.line-height">
+		<completion string="normal" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.list-style">
+		<completion string="none" />
+		<completion string="inside" />
+		<completion string="outside" />
+		<completion string="disc" />
+		<completion string="circle" />
+		<completion string="square" />
+		<completion string="decimal" />
+		<completion string="decimal-leading-zero" />
+		<completion string="lower-roman" />
+		<completion string="upper-roman" />
+		<completion string="lower-greek" />
+		<completion string="lower-alpha" />
+		<completion string="lower-latin" />
+		<completion string="upper-alpha" />
+		<completion string="upper-latin" />
+		<completion string="hebrew" />
+		<completion string="armenian" />
+		<completion string="georgian" />
+		<completion string="cjk-ideographic" />
+		<completion string="hiragana" />
+		<completion string="katakana" />
+		<completion string="hiragana-iroha" />
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.list-style-image">
+		<completion string="none" />
+		<completion string="inherit" />
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.list-style-position">
+		<completion string="inside" />
+		<completion string="outside" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.list-style-type">
+		<completion string="disc" />
+		<completion string="circle" />
+		<completion string="square" />
+		<completion string="decimal" />
+		<completion string="decimal-leading-zero" />
+		<completion string="lower-roman" />
+		<completion string="upper-roman" />
+		<completion string="lower-greek" />
+		<completion string="lower-alpha" />
+		<completion string="lower-latin" />
+		<completion string="upper-alpha" />
+		<completion string="upper-latin" />
+		<completion string="hebrew" />
+		<completion string="armenian" />
+		<completion string="georgian" />
+		<completion string="cjk-ideographic" />
+		<completion string="hiragana" />
+		<completion string="katakana" />
+		<completion string="hiragana-iroha" />
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.margin">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.margin-bottom">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.margin-left">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.margin-right">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.margin-top">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.marker-offset">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.marquee-direction">
+		<completion string="forward"/>
+		<completion string="reverse"/>
+	</set>
+	<set name="com.macrabbit.css.property.marquee-play-count">
+		<completion string="infinite"/>
+	</set>
+	<set name="com.macrabbit.css.property.marquee-speed">
+		<completion string="slow"/>
+		<completion string="normal"/>
+		<completion string="fast"/>
+	</set>
+	<set name="com.macrabbit.css.property.marquee-style">
+		<completion string="scroll"/>
+		<completion string="slide"/>
+		<completion string="alternate"/>
+	</set>
+	<set name="com.macrabbit.css.property.max-height">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.max-width">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.min-height">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.min-width">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.nav-index">
+		<completion string="auto"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.nav-up">
+		<completion string="auto"/>
+		<completion string="current"/>
+		<completion string="root"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.nav-right">
+		<completion string="auto"/>
+		<completion string="current"/>
+		<completion string="root"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.nav-down">
+		<completion string="auto"/>
+		<completion string="current"/>
+		<completion string="root"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.nav-left">
+		<completion string="auto"/>
+		<completion string="current"/>
+		<completion string="root"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.opacity">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.orphans">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.outline">
+		<completion string="invert" />
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.outline-color">
+		<completion string="invert" />
+		<completion string="inherit" />
+		<!--@color-functions-->
+		<completion string="rgb">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="rgba">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:255}, ${2:255}, ${3:255}, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsl">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="hsla">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:360}, ${2:100}%, ${3:100}%, ${4:.75}\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.outline-offset">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.outline-style">
+		<completion string="none" />
+		<completion string="hidden" />
+		<completion string="dotted" />
+		<completion string="dashed" />
+		<completion string="solid" />
+		<completion string="double" />
+		<completion string="groove" />
+		<completion string="ridge" />
+		<completion string="inset" />
+		<completion string="outset" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.outline-width">
+		<completion string="thin" />
+		<completion string="medium" />
+		<completion string="thick" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.overflow">
+		<completion string="visible" />
+		<completion string="hidden" />
+		<completion string="scroll" />
+		<completion string="auto" />
+		<completion string="inherit" />
+		<!-- Vendor-specific -->
+		<completion string="overlay"/>
+		<completion string="-webkit-marquee"/>
+	</set>
+	<set name="com.macrabbit.css.property.overflow-x">
+		<completion string="visible" />
+		<completion string="hidden" />
+		<completion string="scroll" />
+		<completion string="auto" />
+		<completion string="inherit" />
+		<!-- Vendor-specific -->
+		<completion string="overlay"/>
+		<completion string="-webkit-marquee"/>
+	</set>
+	<set name="com.macrabbit.css.property.overflow-y">
+		<completion string="visible" />
+		<completion string="hidden" />
+		<completion string="scroll" />
+		<completion string="auto" />
+		<completion string="inherit" />
+		<!-- Vendor-specific -->
+		<completion string="overlay"/>
+		<completion string="-webkit-marquee"/>
+	</set>
+	<set name="com.macrabbit.css.property.overflow-style">
+		<completion string="auto"/>
+		<completion string="marquee-line"/>
+		<completion string="marquee-block"/>
+	</set>
+	<set name="com.macrabbit.css.property.padding">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.padding-bottom">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.padding-left">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.padding-right">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.padding-top">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.page">
+		<completion string="auto" />
+	</set>
+	<set name="com.macrabbit.css.property.page-break-after">
+		<completion string="auto" />
+		<completion string="always" />
+		<completion string="avoid" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.page-break-before">
+		<completion string="auto" />
+		<completion string="always" />
+		<completion string="avoid" />
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.page-break-inside">
+		<completion string="auto" />
+		<completion string="avoid" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.pause">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.pause-after">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.pause-before">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.pitch">
+		<completion string="x-low" />
+		<completion string="low" />
+		<completion string="medium" />
+		<completion string="high" />
+		<completion string="x-high" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.pitch-range">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.play-during">
+		<completion string="auto" />
+		<completion string="none" />
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.position">
+		<completion string="static" />
+		<completion string="relative" />
+		<completion string="absolute" />
+		<completion string="fixed" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.quotes">
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.resize">
+		<completion string="none"/>
+		<completion string="both"/>
+		<completion string="horizontal"/>
+		<completion string="vertical"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.richness">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.right">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.ruby-align">
+		<completion string="auto"/>
+		<completion string="start"/>
+		<completion string="left"/>
+		<completion string="center"/>
+		<completion string="end"/>
+		<completion string="right"/>
+		<completion string="distribute-letter"/>
+		<completion string="distribute-space"/>
+		<completion string="line-edge"/>
+	</set>
+	<set name="com.macrabbit.css.property.ruby-position">
+		<completion string="after"/>
+		<completion string="before"/>
+		<completion string="right"/>
+	</set>
+	<set name="com.macrabbit.css.property.ruby-overhang">
+		<completion string="auto"/>
+		<completion string="start"/>
+		<completion string="end"/>
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.ruby-span">
+		<completion string="none"/>
+		<completion string="attr">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.size">
+		<completion string="auto" />
+		<completion string="portrait" />
+		<completion string="landscape" />
+		
+		<completion string="A5" />
+		<completion string="A4" />
+		<completion string="A3" />
+		<completion string="B5" />
+		<completion string="B4" />
+		<completion string="letter" />
+		<completion string="legal" />
+		<completion string="ledger" />
+	</set>
+	<set name="com.macrabbit.css.property.speak">
+		<completion string="normal" />
+		<completion string="none" />
+		<completion string="spell-out" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.speak-header">
+		<completion string="once" />
+		<completion string="always" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.speak-numeral">
+		<completion string="digits" />
+		<completion string="continuous" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.speak-punctuation">
+		<completion string="code" />
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.speech-rate">
+		<completion string="x-slow" />
+		<completion string="slow" />
+		<completion string="medium" />
+		<completion string="fast" />
+		<completion string="x-fast" />
+		<completion string="faster" />
+		<completion string="slower" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.stress">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.table-layout">
+		<completion string="auto" />
+		<completion string="fixed" />
+	</set>
+	<set name="com.macrabbit.css.property.text-align">
+		<completion string="left" />
+		<completion string="right" />
+		<completion string="center" />
+		<completion string="justify" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.text-decoration">
+		<completion string="none" />
+		<completion string="underline" />
+		<completion string="overline" />
+		<completion string="line-through" />
+		<completion string="blink" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.text-indent">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.text-overflow">
+		<completion string="clip" />
+		<completion string="ellipsis" />
+	</set>
+	<set name="com.macrabbit.css.property.text-shadow">
+		<completion string="inherit" />
+		<completion string="none" />
+	</set>
+	<set name="com.macrabbit.css.property.text-transform">
+		<completion string="capitalize" />
+		<completion string="uppercase" />
+		<completion string="lowercase" />
+		<completion string="none" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.top">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.unicode-bidi">
+		<completion string="normal" />
+		<completion string="embed" />
+		<completion string="bidi-override" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.vertical-align">
+		<completion string="baseline" />
+		<completion string="sub" />
+		<completion string="super" />
+		<completion string="top" />
+		<completion string="text-top" />
+		<completion string="middle" />
+		<completion string="bottom" />
+		<completion string="text-bottom" />
+		<completion string="inherit" />
+		<!-- Vendor-specific -->
+		<completion string="-webkit-baseline-middle"/>
+	</set>
+	<set name="com.macrabbit.css.property.visibility">
+		<completion string="visible" />
+		<completion string="hidden" />
+		<completion string="collapse" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.voice-family">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.volume">
+		<completion string="silent" />
+		<completion string="x-soft" />
+		<completion string="soft" />
+		<completion string="medium" />
+		<completion string="loud" />
+		<completion string="x-loud" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.white-space">
+		<completion string="normal" />
+		<completion string="pre" />
+		<completion string="pre-wrap" />
+		<completion string="pre-line" />
+		<completion string="nowrap" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.widows">
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.width">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.word-spacing">
+		<completion string="normal" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.word-break">
+		<completion string="normal" />
+		<completion string="break-all" />
+		<completion string="hyphenate" />
+	</set>
+	<set name="com.macrabbit.css.property.word-wrap">
+		<completion string="normal" />
+		<completion string="break-word" />
+	</set>
+	<set name="com.macrabbit.css.property.z-index">
+		<completion string="auto" />
+		<completion string="inherit" />
+	</set>
+	
+	<!-- Vendor-specific and advanced properties -->
+	<set name="com.macrabbit.css.property.-webkit-animation">
+		<completion string="now"/>
+		<completion string="normal"/>
+		<completion string="alternate"/>
+		<completion string="infinite"/>
+		<completion string="none"/>
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-delay">
+		<completion string="now"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-direction">
+		<completion string="normal"/>
+		<completion string="alternate"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-fill-mode">
+		<completion string="none" />
+		<completion string="forwards" />
+		<completion string="backwards" />
+		<completion string="both" />
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-iteration-count">
+		<completion string="infinite"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-name">
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-play-state">
+		<!-- This may be deprecated in CSS3 -->
+		<completion string="running"/>
+		<completion string="paused"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-animation-timing-function">
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-backface-visibility">
+		<completion string="visible"/>
+		<completion string="hidden"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-border-image">
+		<completion string="repeat"/>
+		<completion string="round"/>
+		<completion string="stretch"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-border-image">
+		<completion string="repeat"/>
+		<completion string="round"/>
+		<completion string="stretch"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-box-reflect">
+		<completion string="above" />
+		<completion string="below" />
+		<completion string="left" />
+		<completion string="right" />
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-box-sizing">
+		<completion string="border-box"/>
+		<completion string="content-box"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-sizing">
+		<completion string="border-box"/>
+		<completion string="content-box"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-shadow">
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-shadow">
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-shadow">
+		<completion string="none"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-orient">
+		<completion string="horizontal" />
+		<completion string="vertical" />
+		<completion string="inline-axis" />
+		<completion string="block-axis" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-orient">
+		<completion string="horizontal" />
+		<completion string="vertical" />
+		<completion string="inline-axis" />
+		<completion string="block-axis" />
+		<completion string="inherit" />
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-orient">
+		<completion string="horizontal" />
+		<completion string="vertical" />
+		<completion string="inline-axis" />
+		<completion string="block-axis" />
+		<completion string="inherit" />
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-direction">
+		<completion string="normal"/>
+		<completion string="reverse"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-direction">
+		<completion string="normal"/>
+		<completion string="reverse"/>
+		<completion string="inherit"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-direction">
+		<completion string="normal"/>
+		<completion string="reverse"/>
+		<completion string="inherit"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-align">
+		<completion string="start" />
+		<completion string="end" />
+		<completion string="center" />
+		<completion string="baseline" />
+		<completion string="stretch" />
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-align">
+		<completion string="start" />
+		<completion string="end" />
+		<completion string="center" />
+		<completion string="baseline" />
+		<completion string="stretch" />
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-align">
+		<completion string="start" />
+		<completion string="end" />
+		<completion string="center" />
+		<completion string="baseline" />
+		<completion string="stretch" />
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-pack">
+		<completion string="start"/>
+		<completion string="end"/>
+		<completion string="center"/>
+		<completion string="justify"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-pack">
+		<completion string="start"/>
+		<completion string="end"/>
+		<completion string="center"/>
+		<completion string="justify"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-pack">
+		<completion string="start"/>
+		<completion string="end"/>
+		<completion string="center"/>
+		<completion string="justify"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.box-lines">
+		<completion string="single"/>
+		<completion string="multiple"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-box-lines">
+		<completion string="single"/>
+		<completion string="multiple"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-box-lines">
+		<completion string="single"/>
+		<completion string="multiple"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.font-smooth">
+		<completion string="auto"/>
+		<completion string="always"/>
+		<completion string="never"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-font-smoothing">
+		<completion string="none"/>
+		<completion string="subpixel-antialiased"/>
+		<completion string="antialiased"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-margin-bottom-collapse">
+		<completion string="collapse"/>
+		<completion string="discard"/>
+		<completion string="separate"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-margin-top-collapse">
+		<completion string="collapse"/>
+		<completion string="discard"/>
+		<completion string="separate"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-margin-collapse">
+		<completion string="collapse"/>
+		<completion string="discard"/>
+		<completion string="separate"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-margin-start">
+		<completion string="auto"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-margin-start">
+		<completion string="auto"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-mask">
+		<completion string="fixed"/>
+		<completion string="scroll"/>
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+		<completion string="repeat" />
+		<completion string="stretch" />
+		<completion string="round" />
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="border" />
+		<completion string="content" />
+		<completion string="padding" />
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-mask-attachment">
+		<completion string="fixed"/>
+		<completion string="scroll"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-mask-box-image">
+		<completion string="repeat" />
+		<completion string="stretch" />
+		<completion string="round" />
+		<!--@image-functions-->
+		<completion string="url">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="image">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+		<completion string="linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-linear-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:white 0%}, ${5:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-moz-radial-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:${2:top left} ${3:90deg}, }${4:${5:circle} ${6:closest-side}, }${7:white 0%}, ${8:black 100%}\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+		<completion string="-webkit-gradient">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::(${1:linear}, ${2:left top}, ${3:left bottom}, from(${4:white}\), to(${5:black}\)\))</transform-into>
+				</append-dynamic>
+				<partial-confirm characters="-" />
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-mask-composite">
+		<completion string="border"/>
+		<completion string="padding"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-mask-origin">
+		<completion string="border" />
+		<completion string="content" />
+		<completion string="padding" />
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-mask-position">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-perspective-origin">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.transition">
+		<!-- http://www.w3.org/TR/css3-transitions/ -->
+		<completion string="all"/>
+		<completion string="none"/>
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-transition">
+		<completion string="all"/>
+		<completion string="none"/>
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-transition">
+		<completion string="all"/>
+		<completion string="none"/>
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-o-transition">
+		<completion string="all"/>
+		<completion string="none"/>
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.transition-property">
+		<completion string="all"/>
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-transition-property">
+		<completion string="all"/>
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-transition-property">
+		<completion string="all"/>
+		<completion string="none"/>
+	</set>
+	<set name="com.macrabbit.css.property.-o-transition-property">
+		<completion string="all"/>
+		<completion string="none"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.transition-timing-function">
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-webkit-transition-timing-function">
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-transition-timing-function">
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	<set name="com.macrabbit.css.property.-o-transition-timing-function">
+		<completion string="ease" />
+		<completion string="linear" />
+		<completion string="ease-in" />
+		<completion string="ease-out" />
+		<completion string="ease-in-out" />
+		<completion string="cubic-bezier">
+			<behavior>
+				<append-dynamic>
+					<matched-suffix>(\()|[^(]</matched-suffix>
+					<transform-into>(?1::($0\))</transform-into>
+				</append-dynamic>
+			</behavior>
+		</completion>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-transform">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\()|[^(]</matched-suffix>
+				<transform-into>(?1::($0\))</transform-into>
+			</append-dynamic>
+		</behavior>
+		<completion string="matrix"/>
+		<completion string="matrix3d"/>
+		<completion string="perspective"/>
+		<completion string="rotate"/>
+		<completion string="rotateX"/>
+		<completion string="rotateY"/>
+		<completion string="rotateZ"/>
+		<completion string="scale"/>
+		<completion string="scale3d"/>
+		<completion string="scaleX"/>
+		<completion string="scaleY"/>
+		<completion string="scaleZ"/>
+		<completion string="skew"/>
+		<completion string="skewX"/>
+		<completion string="skewY"/>
+		<completion string="translate"/>
+		<completion string="translate3d"/>
+		<completion string="translateX"/>
+		<completion string="translateY"/>
+		<completion string="translateZ"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-transform">
+		<!-- FIXME: add 3D transforms if/when Mozilla adds them -->
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\()|[^(]</matched-suffix>
+				<transform-into>(?1::($0\))</transform-into>
+			</append-dynamic>
+		</behavior>
+		<completion string="matrix"/>
+		<completion string="rotate"/>
+		<completion string="scale"/>
+		<completion string="scaleX"/>
+		<completion string="scaleY"/>
+		<completion string="skew"/>
+		<completion string="skewX"/>
+		<completion string="skewY"/>
+		<completion string="translate"/>
+		<completion string="translateX"/>
+		<completion string="translateY"/>
+	</set>
+	<set name="com.macrabbit.css.property.-o-transform">
+		<!-- FIXME: add 3D transforms if/when Opera adds them -->
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\()|[^(]</matched-suffix>
+				<transform-into>(?1::($0\))</transform-into>
+			</append-dynamic>
+		</behavior>
+		<completion string="matrix"/>
+		<completion string="rotate"/>
+		<completion string="scale"/>
+		<completion string="scaleX"/>
+		<completion string="scaleY"/>
+		<completion string="skew"/>
+		<completion string="skewX"/>
+		<completion string="skewY"/>
+		<completion string="translate"/>
+		<completion string="translateX"/>
+		<completion string="translateY"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-transform-origin">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+	</set>
+	<set name="com.macrabbit.css.property.-moz-transform-origin">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+	</set>
+	<set name="com.macrabbit.css.property.-o-transform-origin">
+		<completion string="top" />
+		<completion string="center" />
+		<completion string="bottom"/>
+		<completion string="left"/>
+		<completion string="right"/>
+	</set>
+	
+	<set name="com.macrabbit.css.property.-webkit-transform-style">
+		<completion string="flat" />
+		<completion string="preserve-3d" />
+	</set>
+	
+</codesense>
